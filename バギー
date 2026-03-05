@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ガチャゲーム</title>
+
+<style>
+body{
+    font-family: sans-serif;
+    text-align:center;
+    background: linear-gradient(135deg,#1e3c72,#2a5298);
+    color:white;
+}
+
+h1{
+    margin-top:40px;
+}
+
+#result{
+    margin-top:40px;
+    font-size:40px;
+    font-weight:bold;
+    height:80px;
+}
+
+button{
+    margin-top:20px;
+    padding:15px 40px;
+    font-size:20px;
+    border:none;
+    border-radius:10px;
+    background:gold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:orange;
+}
+
+.card{
+    margin:20px auto;
+    width:200px;
+    height:260px;
+    background:white;
+    border-radius:10px;
+    color:black;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+.r{border:5px solid silver;}
+.sr{border:5px solid blue;}
+.ssr{border:5px solid purple;}
+.ur{border:5px solid gold;}
+</style>
+</head>
+
+<body>
+
+<h1>🎮 ガチャゲーム 🎮</h1>
+
+<div id="result"></div>
+<div id="cardArea"></div>
+
+<button onclick="gacha()">ガチャを引く！</button>
+
+<script>
+
+function gacha(){
+
+    const rand = Math.random();
+
+    let rarity;
+    let character;
+
+    if(rand < 0.6){
+        rarity = "R";
+        character = ["スライム","ゴブリン","兵士","犬","猫","道化の武田"];
+    }
+    else if(rand < 0.85){
+        rarity = "SR";
+        character = ["魔法使い","忍者","騎士","ドラゴン使い"];
+    }
+    else if(rand < 0.97){
+        rarity = "SSR";
+        character = ["伝説の勇者","フェニックス","魔王"];
+    }
+    else{
+        rarity = "UR";
+        character = ["神龍","時の支配者","道化のバギー"];
+    }
+
+    const chara = character[Math.floor(Math.random()*character.length)];
+
+    const resultText = rarity + " GET!";
+    document.getElementById("result").innerText = resultText;
+
+    const cardHTML =
+        '<div class="card '+rarity.toLowerCase()+'">'+
+        chara +
+        '</div>';
+
+    document.getElementById("cardArea").innerHTML = cardHTML;
+}
+
+</script>
+
+</body>
+</html>
